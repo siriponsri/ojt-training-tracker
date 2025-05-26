@@ -11,7 +11,8 @@ scope = [
 ]
 
 def get_gsheet_client():
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    creds_dict = json.loads(st.secrets["gcp_service_account"])
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     return gspread.authorize(creds)
 
 SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/14a9Yct53RD5IQB6bQC10b-ngYLQiqhoFwD6iyvGZZdg/edit?gid=2038251767#gid=2038251767"
